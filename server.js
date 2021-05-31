@@ -12,6 +12,6 @@ const api = require('./routes/api');
 app.use(express.static('public',{extensions:['html']}));
 app.use('/api',api);
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log('App launched at port ' + port);
 });
