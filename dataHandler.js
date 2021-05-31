@@ -10,7 +10,7 @@ function saveNotes(){
 }
 
 module.exports = {
-    init(){
+    init(){ //if db.json exists, load it, otherwise create it
         try {
             notesData = require(dbPath);
         } catch {

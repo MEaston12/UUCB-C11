@@ -2,6 +2,7 @@ const dataHandler = require('../dataHandler');
 const express = require('express');
 const api = express.Router();
 
+//This automagically parses incoming json bodies into the req object and i love it
 api.use(require('body-parser').json());
 
 api.get('/notes', (req,res,next) => {
