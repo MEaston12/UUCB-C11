@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const dataHandler = require('./dataHandler');
+require('./dataHandler').init();
 
 //Split out routes into separate files
 const api = require('./routes/api');
