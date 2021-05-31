@@ -1,5 +1,6 @@
 //This module is intended to handle all internal I/O between the server and the db
 const fs = require('fs').promises;
+const uniqid = require('uniqid');
 
 const dbPath = './db/db.json';
 let notesData = [];
@@ -13,22 +14,25 @@ module.exports = {
         try {
             notesData = require(dbPath);
         } catch {
-            return saveNotes();
+            saveNotes();
         }
     },
     notes: {
         get(){
             return notesData;
         },
-        add(note){
+        add(title, text){
+            const note = {title, text, id:uniqid()};
             notesData.push(note);
-            return saveNotes();
+            saveNotes();
+            return note;
         },
         delete(id){
             const noteIndex = notesData.findIndex(note => note.id === id);
-            if(noteIndex < 0) return; //Exit early if title not found
+            if(noteIndex < 0) return false; //Exit early if title not found
             notesData.splice(noteIndex, 1);
-            return saveNotes();
+            saveNotes();
+            return true;
         }
     }
 }
